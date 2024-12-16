@@ -1,15 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { useWallet } from '@/components/providers/wallet-provider';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useToast } from '@/components/ui/use-toast';
-import { Loader2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { InsuranceField } from '@/lib/insurance/types';
+import { useWallet } from '@/components/providers/wallet-provider'; // Wallet provider hook
+import { Button } from '@/components/ui/button'; // UI button component
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // UI card components
+import { Input } from '@/components/ui/input'; // UI input component
+import { Label } from '@/components/ui/label'; // UI label component
+import { useToast } from '@/components/ui/use-toast'; // Toast notification hook
+import { Loader2 } from 'lucide-react'; // Icon for loader
+import { useRouter } from 'next/navigation'; // Next.js router for navigation
+import Gun from 'gun'; // Gun database for decentralized data
+import { InsuranceField } from '@/lib/insurance/types'; // Types for insurance fields
+
+// Initialize Gun database
+const gun = Gun();
 
 interface InsuranceFormProps {
   title: string;
@@ -19,15 +23,17 @@ interface InsuranceFormProps {
 }
 
 export function InsuranceForm({ title, description, type, fields }: InsuranceFormProps) {
-  const { address } = useWallet();
-  const { toast } = useToast();
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<Record<string, string>>({});
+  const { address } = useWallet(); // Get connected wallet address
+  const { toast } = useToast(); // Toast for notifications
+  const router = useRouter(); // Router for navigation
+  const [loading, setLoading] = useState(false); // State to manage loading
+  const [formData, setFormData] = useState<Record<string, string>>({}); // State to manage form data
 
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
     if (!address) {
+      // Show toast if wallet is not connected
       toast({
         title: 'Wallet Required',
         description: 'Please connect your wallet to apply for insurance',
@@ -36,23 +42,36 @@ export function InsuranceForm({ title, description, type, fields }: InsuranceFor
       return;
     }
 
-    setLoading(true);
+    setLoading(true); // Set loading state
     try {
-      // Implement blockchain contract interaction here
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Create insurance data object
+      const insuranceData = {
+        type, // Insurance type (health, car, crop)
+        formData, // Form data from user inputs
+        address, // Wallet address
+        timestamp: new Date().toISOString(), // Current timestamp
+      };
+
+      // Save data to Gun database under the 'insurances' node
+      gun.get('insurances').get(address).set(insuranceData);
+
+      // Show success toast
       toast({
         title: 'Application Submitted',
         description: 'Your insurance application has been submitted successfully',
       });
+
+      // Navigate to the profile page
       router.push('/profile');
     } catch (error) {
+      // Show error toast on failure
       toast({
         title: 'Submission Failed',
         description: 'Failed to submit insurance application. Please try again.',
         variant: 'destructive',
       });
     } finally {
-      setLoading(false);
+      setLoading(false); // Reset loading state
     }
   };
 
@@ -75,7 +94,7 @@ export function InsuranceForm({ title, description, type, fields }: InsuranceFor
                     placeholder={field.placeholder}
                     required={field.required}
                     value={formData[field.id] || ''}
-                    onChange={(e) => 
+                    onChange={(e) =>
                       setFormData((prev) => ({ ...prev, [field.id]: e.target.value }))
                     }
                   />

@@ -1,13 +1,41 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useWallet } from '@/components/providers/wallet-provider';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { formatEther, truncateAddress } from '@/lib/utils';
+import { formatEther } from '@/lib/utils';
 import { Wallet, Shield, History } from 'lucide-react';
+import Gun from 'gun';
+
+const gun = Gun();
+
+interface InsurancePolicy {
+  type: string;
+  formData: Record<string, string>;
+  timestamp: string;
+}
 
 export default function ProfilePage() {
   const { address, balance, disconnect } = useWallet();
+  const [policies, setPolicies] = useState<InsurancePolicy[]>([]);
+
+  useEffect(() => {
+    if (address) {
+      // Fetch active insurance policies from Gun
+      const fetchPolicies = async () => {
+        const userPolicies: InsurancePolicy[] = [];
+        gun.get('insurances').get(address).map().once((data) => {
+          if (data) {
+            userPolicies.push(data);
+          }
+          setPolicies(userPolicies);
+        });
+      };
+
+      fetchPolicies();
+    }
+  }, [address]);
 
   if (!address) {
     return (
@@ -48,7 +76,26 @@ export default function ProfilePage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">No active policies found</p>
+              {policies.length > 0 ? (
+                <div className="space-y-4">
+                  {policies.map((policy, index) => (
+                    <div key={index} className="border rounded-lg p-4">
+                      <p><span className="font-medium">Type:</span> {policy.type}</p>
+                      <p><span className="font-medium">Date Applied:</span> {new Date(policy.timestamp).toLocaleString()}</p>
+                      <p><span className="font-medium">Details:</span></p>
+                      <ul className="ml-4 list-disc">
+                        {Object.entries(policy.formData).map(([key, value]) => (
+                          <li key={key}>
+                            <span className="font-medium">{key}:</span> {value}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground">No active policies found</p>
+              )}
             </CardContent>
           </Card>
 
