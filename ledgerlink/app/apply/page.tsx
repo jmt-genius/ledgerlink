@@ -1,7 +1,9 @@
 'use client';
 
+import { PinContainer } from '@/components/ui/3d-pin';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Car, Heart, Wheat, ShieldCheck, Zap, Clock } from 'lucide-react';
+import { AuroraBackground } from '@/components/ui/aurora-background';
 import Link from 'next/link';
 
 export default function ApplyPage() {
@@ -19,50 +21,60 @@ export default function ApplyPage() {
         </div>
 
         {/* Insurance Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <Link href="/apply/health" className="group">
-            <Card className="relative overflow-hidden transition-all duration-300 hover:shadow-xl dark:hover:shadow-primary/10 hover:-translate-y-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/0 dark:from-primary/10 dark:to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <CardHeader className="text-center relative z-10">
-                <div className="mx-auto rounded-full p-3 bg-primary/10 dark:bg-primary/20 mb-4 w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Heart className="w-8 h-8 text-primary" />
+        <div className="grid md:grid-cols-3 gap-1 mb-16">
+          <Link href="/apply/health">
+            <div className="group">
+              <PinContainer title="Health Insurance" href="/apply/health">
+                <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[20rem] h-[15rem]">
+                  <div className="mx-auto rounded-full p-3 bg-primary/10 dark:bg-primary/20 mb-4 w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Heart className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="max-w-xs !pb-2 !m-0 font-bold text-base text-slate-100">Health Insurance</h3>
+                  <div className="text-base !m-0 !p-0 font-normal">
+                    <span className="text-slate-500">
+                      Comprehensive health coverage with smart contract verification
+                    </span>
+                  </div>
+                
                 </div>
-                <CardTitle className="text-2xl font-bold mb-2">Health Insurance</CardTitle>
-                <CardDescription className="text-base">
-                  Comprehensive health coverage with smart contract verification
-                </CardDescription>
-              </CardHeader>
-            </Card>
+              </PinContainer>
+            </div>
           </Link>
 
-          <Link href="/apply/car" className="group">
-            <Card className="relative overflow-hidden transition-all duration-300 hover:shadow-xl dark:hover:shadow-primary/10 hover:-translate-y-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/0 dark:from-primary/10 dark:to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <CardHeader className="text-center relative z-10">
-                <div className="mx-auto rounded-full p-3 bg-primary/10 dark:bg-primary/20 mb-4 w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Car className="w-8 h-8 text-primary" />
+          <Link href="/apply/car">
+            <div className="group">
+              <PinContainer title="Car Insurance" href="/apply/car">
+                <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[20rem] h-[15rem]">
+                  <div className="mx-auto rounded-full p-3 bg-primary/10 dark:bg-primary/20 mb-4 w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Car className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="max-w-xs !pb-2 !m-0 font-bold text-base text-slate-100">Car Insurance</h3>
+                  <div className="text-base !m-0 !p-0 font-normal">
+                    <span className="text-slate-500">
+                      IoT-integrated vehicle coverage with real-time monitoring
+                    </span>
+                  </div>
                 </div>
-                <CardTitle className="text-2xl font-bold mb-2">Car Insurance</CardTitle>
-                <CardDescription className="text-base">
-                  IoT-integrated vehicle coverage with real-time monitoring
-                </CardDescription>
-              </CardHeader>
-            </Card>
+              </PinContainer>
+            </div>
           </Link>
 
-          <Link href="/apply/crop" className="group">
-            <Card className="relative overflow-hidden transition-all duration-300 hover:shadow-xl dark:hover:shadow-primary/10 hover:-translate-y-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/0 dark:from-primary/10 dark:to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <CardHeader className="text-center relative z-10">
-                <div className="mx-auto rounded-full p-3 bg-primary/10 dark:bg-primary/20 mb-4 w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Wheat className="w-8 h-8 text-primary" />
+          <Link href="/apply/crop">
+            <div className="group">
+              <PinContainer title="Crop Insurance" href="/apply/crop">
+                <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[20rem] h-[15rem]">
+                  <div className="mx-auto rounded-full p-3 bg-primary/10 dark:bg-primary/20 mb-4 w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Wheat className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="max-w-xs !pb-2 !m-0 font-bold text-base text-slate-100">Crop Insurance</h3>
+                  <div className="text-base !m-0 !p-0 font-normal">
+                    <span className="text-slate-500">
+                      Weather-indexed protection with automated claim processing
+                    </span>
+                  </div>
                 </div>
-                <CardTitle className="text-2xl font-bold mb-2">Crop Insurance</CardTitle>
-                <CardDescription className="text-base">
-                  Weather-indexed protection with automated claim processing
-                </CardDescription>
-              </CardHeader>
-            </Card>
+              </PinContainer>
+            </div>
           </Link>
         </div>
 
