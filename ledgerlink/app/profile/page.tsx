@@ -16,9 +16,16 @@ interface InsurancePolicy {
   timestamp: string;
 }
 
+interface Claim {
+  policyNumber: string;
+  claimType: string;
+  description: string;
+}
+
 export default function ProfilePage() {
   const { address, balance, disconnect } = useWallet();
   const [policies, setPolicies] = useState<InsurancePolicy[]>([]);
+  const [claims, setClaims] = useState<Claim[]>([]);
 
   useEffect(() => {
     if (address) {
@@ -34,6 +41,19 @@ export default function ProfilePage() {
       };
 
       fetchPolicies();
+
+      // Fetch claims history from Gun
+      const fetchClaims = async () => {
+        const userClaims: Claim[] = [];
+        gun.get('claims').get(address).map().once((data) => {
+          if (data) {
+            userClaims.push(data);
+          }
+          setClaims(userClaims);
+        });
+      };
+
+      fetchClaims();
     }
   }, [address]);
 
@@ -107,7 +127,20 @@ export default function ProfilePage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">No claims history found</p>
+              {claims.length > 0 ? (
+                <div className="space-y-4">
+                  {claims.map((claim, index) => (
+                    <div key={index} className="border rounded-lg p-4">
+                      <p><span className="font-medium">Policy Number:</span> {claim.policyNumber}</p>
+                      <p><span className="font-medium">Claim Type:</span> {claim.claimType}</p>
+                      <p><span className="font-medium">Description:</span> {claim.description}</p>
+                      {/* <p><span className="font-medium">Date Submitted:</span> {new Date(Number(claim.timestamp)).toLocaleString()}</p> */}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground">No claims found</p>
+              )}
             </CardContent>
           </Card>
         </div>
