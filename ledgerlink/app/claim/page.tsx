@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Gun from 'gun';
 import { useWallet } from '@/components/providers/wallet-provider';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,31 +11,73 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { Loader2 } from 'lucide-react';
 
+const gun = Gun();
+
+interface Claim {
+  policyNumber: string;
+  claimType: string;
+  description: string;
+  timestamp: string;
+}
+
 export default function ClaimPage() {
   const { address } = useWallet();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    policyNumber: '',
+    claimType: '',
+    description: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
 
   const handleSubmitClaim = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!address) {
       toast({
         title: 'Wallet Required',
-        description: 'Please connect your wallet to submit a claim',
+        description: 'Please connect your wallet to submit a claim.',
         variant: 'destructive',
       });
       return;
     }
 
     setLoading(true);
-    // Implement claim submission logic here
-    setTimeout(() => {
-      setLoading(false);
+
+    const newClaim: Claim = {
+      ...formData,
+      timestamp: new Date().toISOString(),
+    };
+
+    try {
+      // Save claim to Gun DB under user's wallet address
+      gun.get('claims').get(address).set(newClaim);
+
       toast({
         title: 'Claim Submitted',
-        description: 'Your claim has been successfully submitted',
+        description: 'Your claim has been successfully submitted.',
       });
-    }, 2000);
+
+      // Reset form
+      setFormData({
+        policyNumber: '',
+        claimType: '',
+        description: '',
+      });
+    } catch (error) {
+      console.error('Error saving claim:', error);
+      toast({
+        title: 'Submission Failed',
+        description: 'An error occurred while submitting the claim.',
+        variant: 'destructive',
+      });
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -51,21 +94,35 @@ export default function ClaimPage() {
             <form onSubmit={handleSubmitClaim} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="policyNumber">Policy Number</Label>
-                <Input id="policyNumber" placeholder="Enter your policy number" required />
+                <Input
+                  id="policyNumber"
+                  placeholder="Enter your policy number"
+                  required
+                  value={formData.policyNumber}
+                  onChange={handleChange}
+                />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="claimType">Claim Type</Label>
-                <Input id="claimType" placeholder="e.g., Health, Car, or Crop" required />
+                <Input
+                  id="claimType"
+                  placeholder="e.g., Health, Car, or Crop"
+                  required
+                  value={formData.claimType}
+                  onChange={handleChange}
+                />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="description">Claim Description</Label>
-                <Textarea 
-                  id="description" 
+                <Textarea
+                  id="description"
                   placeholder="Describe your claim in detail"
                   className="min-h-[100px]"
                   required
+                  value={formData.description}
+                  onChange={handleChange}
                 />
               </div>
 
