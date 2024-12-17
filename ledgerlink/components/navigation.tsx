@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Link2, UserCircle } from 'lucide-react';
-import { ModeToggle } from '@/components/mode-toggle';
-import { useWallet } from '@/components/providers/wallet-provider';
-import { truncateAddress } from '@/lib/utils';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Link2, UserCircle } from "lucide-react";
+import { ModeToggle } from "@/components/mode-toggle";
+import { useWallet } from "@/components/providers/wallet-provider";
+import { truncateAddress } from "@/lib/utils";
 
 export function Navigation() {
   const pathname = usePathname();
@@ -25,8 +25,10 @@ export function Navigation() {
             <Link
               href="/apply"
               className={cn(
-                'transition-colors hover:text-foreground/80',
-                pathname.startsWith('/apply') ? 'text-foreground' : 'text-foreground/60'
+                "transition-colors hover:text-foreground/80",
+                pathname.startsWith("/apply")
+                  ? "text-foreground"
+                  : "text-foreground/60"
               )}
             >
               Apply
@@ -34,17 +36,28 @@ export function Navigation() {
             <Link
               href="/claim"
               className={cn(
-                'transition-colors hover:text-foreground/80',
-                pathname === '/claim' ? 'text-foreground' : 'text-foreground/60'
+                "transition-colors hover:text-foreground/80",
+                pathname === "/claim" ? "text-foreground" : "text-foreground/60"
               )}
             >
               Claim
             </Link>
             <Link
+              href="/about"
+              className={cn(
+                "transition-colors hover:text-foreground/80",
+                pathname === "/about" ? "text-foreground" : "text-foreground/60"
+              )}
+            >
+              About
+            </Link>
+            <Link
               href="/profile"
               className={cn(
-                'transition-colors hover:text-foreground/80',
-                pathname === '/profile' ? 'text-foreground' : 'text-foreground/60'
+                "transition-colors hover:text-foreground/80",
+                pathname === "/profile"
+                  ? "text-foreground"
+                  : "text-foreground/60"
               )}
             >
               Profile
