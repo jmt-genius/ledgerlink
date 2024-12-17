@@ -116,8 +116,8 @@ Democratize insurance by creating a transparent, efficient ecosystem that priori
 ## 🛤 **Roadmap**
 
 ### Phase 1: Development
-- [x] IoT sensor integration prototype
-- [x] Blockchain smart contract development
+- ✅ IoT sensor integration prototype
+- ✅ Blockchain smart contract development
 - [ ] Initial testnet deployment
 
 ### Phase 2: Beta
