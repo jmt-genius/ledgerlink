@@ -118,17 +118,17 @@ Democratize insurance by creating a transparent, efficient ecosystem that priori
 ### Phase 1: Development
 - ✅ IoT sensor integration prototype
 - ✅ Blockchain smart contract development
-- [ ] Initial testnet deployment
+- ⬜ Initial testnet deployment
 
 ### Phase 2: Beta
-- [ ] User testing
-- [ ] Expand sensor integration
-- [ ] Refine claim processing algorithms
+- ⬜ User testing
+- ⬜ Expand sensor integration
+- ⬜ Refine claim processing algorithms
 
 ### Phase 3: Expansion
-- [ ] Multi-sector insurance coverage
-- [ ] Global market penetration
-- [ ] Advanced predictive analytics
+- ⬜ Multi-sector insurance coverage
+- ⬜ Global market penetration
+- ⬜ Advanced predictive analytics
 
 ---
 
@@ -140,9 +140,7 @@ This project is licensed under the MIT License.
 
 ## 📞 **Contact**
 
-- **Email**: support@ledgerlink.io
-- **Website**: [www.ledgerlink.io](https://www.ledgerlink.io)
-- **Twitter**: [@LedgerLink](https://twitter.com/ledgerlink)
+- **Email**: ahkharsha@gmail.com
 
 ---
 
