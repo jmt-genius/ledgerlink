@@ -1,94 +1,149 @@
-# LedgerLink
+# 🏥 **LedgerLink** - Reinventing Insurance with Blockchain & IoT
 
-Welcome to the LedgerLink, a crop insurance portal! This project allows users to submit insurance claims securely. Users can sign up using their **wallet address** and file claims, which will be stored in a decentralized database. 
-
-## Table of Contents
-
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Frontend Setup](#frontend-setup)
-- [Backend Setup](#backend-setup)
-- [Testing](#testing)
-- [Additional Information](#additional-information)
+[![Deployment Status](https://img.shields.io/badge/Deployment-Upcoming-yellow)](https://github.com/jmt-genius/ledgerlink)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/jmt-genius/ledgerlink)
 
 ---
 
-## Features
-
-- **Sign-Up/Sign-In** using **wallet address**.
-- **Submit Claims** with **policy number**, **claim type**, and **claim description**.
-- **Claim Submission History** is stored under the user’s wallet address.
-- **Real-Time Toast Notifications** for successful and failed submissions.
-- **Responsive UI** with a modern design using Tailwind CSS.
-
-## Project Structure
-
-The project is divided into two main sections: the backend (smart contract) and the frontend (Next app).
-
-## Tech Stack
-
-- **Frontend**: Next.js, Tailwind CSS, React.js
-- **Backend**: GunDB (Decentralized Database)
-- **Wallet Integration**: Wallet provider (e.g., MetaMask or any web3 provider)
-- **Notifications**: Toast notifications for feedback
+LedgerLink is an innovative blockchain-powered insurance platform designed to revolutionize insurance claims processing through IoT sensors, smart contracts, and transparent verification. We bring trust, efficiency, and automation to insurance ecosystems.
 
 ---
 
-## Getting Started
+## 🚀 **Deployment**
 
-To get a local copy up and running, follow these steps:
+The platform is currently in development and will be deployed on the Peaq Network.
 
-Clone the repository:
+---
 
-```bash
-git clone https://github.com/yourusername/ledgerlink.git
-cd ledgerlink
-code .
-```
+## 📜 **Smart Contract**
 
-## Frontend Setup
+Smart Contract Address: TBD
+Network: Peaq Testnet
 
-Install the dependencies and start the development server:
+---
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+## 📚 **Table of Contents**
 
-## Backend Setup
+- [🌟 Key Features](#-key-features)
+- [🎯 Project Vision](#-project-vision)
+- [⚙️ Technologies Used](#️-technologies-used)
+- [🛠 Getting Started](#-getting-started)
+- [📖 Usage](#-usage)
+- [🛤 Roadmap](#-roadmap)
+- [📜 License](#-license)
+- [📞 Contact](#-contact)
 
-### Hardhat Setup:
+---
 
-Hardhat is used for Ethereum smart contract development, testing, and deployment.
-You'll deploy a smart contract to a local Ethereum blockchain using Hardhat, avoiding the need for public test networks like Rinkeby or Ropsten for this project.
-The smart contract will interact with external data sources (like sensor data) and allow users to buy insurance based on conditions (e.g., if the input sensor data exceeds a threshold).
+## 🌟 **Key Features**
 
-**Smart Contract Functions:**
+- **IoT-Powered Claims**: Automated claims processing using real-time sensor data
+- **Blockchain Verification**: Transparent, tamper-proof claim settlements
+- **Instant Payouts**: Eliminate manual verification and reduce settlement times
+- **Multi-Sector Coverage**: Initial focus on car and home insurance
+- **Real-Time Sensor Integration**: Automatic incident detection and verification
 
-- **Create Insurance**: Users can purchase insurance by sending ETH to the contract. Each policy stores the address of the buyer, the premium, and sensor data.
-- **Sensor data Updates**: The contract owner can update sensor data daily.
-- **Automated Payout**: If the input data threshold is exceeded for a set period, the contract automatically pays a settlement to the insured user.
-  
-**Key Solidity Functions:**
+---
 
-- **buyInsurance()**: Allows users to buy insurance by sending ETH.
-- **updateTemperature()**: Allows the contract owner to input daily temperature updates.
-- **paySettlement()**: Pays the insurance settlement to the farmer if the conditions are met.
+## 🎯 **Project Vision**
 
-## Testing:
+Democratize insurance by creating a transparent, efficient ecosystem that prioritizes customer experience and leverages cutting-edge technologies like IoT and blockchain.
 
-Hardhat includes testing functionalities to simulate and validate the contract behavior.
-Use Ethers.js and Chai for interacting with the contract and for testing.
+---
 
-**Hardhat Configuration**:
+## ⚙️ **Technologies Used**
 
-In the hardhat.config.js file, ensure configurations are set for deploying to the local chain and using Metamask.
+- **Blockchain**: Peaq Network
+- **Smart Contracts**: Solidity
+- **IoT Integration**: Raspberry Pi, Ultrasonic Sensors
+- **Frontend**: React.js
+- **Data Verification**: Blockchain-based smart contracts
 
-## Additional Information
+---
 
-Ensure  **Node.js** and **npm** are installed.
-**GunDB** is a decentralized database that requires no centralized backend server but is crucial for data storage.
-**Wallet Integration**: Ensure you have a wallet provider (like MetaMask) connected to your app to authenticate users.
+## 🛠 **Getting Started**
+
+### 🔧 **Prerequisites**
+- Node.js (v16+)
+- npm
+- MetaMask or Web3 Wallet
+
+### 📦 **Installation**
+
+1. **Clone the Repository**
+    ```bash
+    git clone https://github.com/jmt-genius/ledgerlink.git
+    cd ledgerlink
+    ```
+
+2. **Install Dependencies**
+    ```bash
+    npm install
+    ```
+
+3. **Set Up Environment Variables**
+    Create a `.env` file with:
+    ```
+    REACT_APP_PEAQ_NETWORK_RPC=your_peaq_network_rpc_url
+    ```
+
+4. **Run the Application**
+    ```bash
+    npm start
+    ```
+
+---
+
+## 📖 **Usage**
+
+### 1. **User Registration**
+- Connect Web3 wallet
+- Complete KYC verification
+- Select insurance policy
+
+### 2. **Policy Purchase**
+- Choose insurance type (car, home)
+- Configure policy parameters
+- Pay premium via cryptocurrency
+
+### 3. **Claims Processing**
+- IoT sensors automatically detect incidents
+- Blockchain verifies claim conditions
+- Instant settlement processed
+
+---
+
+## 🛤 **Roadmap**
+
+### Phase 1: Development
+- [x] IoT sensor integration prototype
+- [x] Blockchain smart contract development
+- [ ] Initial testnet deployment
+
+### Phase 2: Beta
+- [ ] User testing
+- [ ] Expand sensor integration
+- [ ] Refine claim processing algorithms
+
+### Phase 3: Expansion
+- [ ] Multi-sector insurance coverage
+- [ ] Global market penetration
+- [ ] Advanced predictive analytics
+
+---
+
+## 📜 **License**
+
+This project is licensed under the MIT License.
+
+---
+
+## 📞 **Contact**
+
+- **Email**: support@ledgerlink.io
+- **Website**: [www.ledgerlink.io](https://www.ledgerlink.io)
+- **Twitter**: [@LedgerLink](https://twitter.com/ledgerlink)
+
+---
+
+*Made with ❤️ by LedgerLink Team*
