@@ -38,7 +38,7 @@ export function Navigation() {
                 pathname === '/claim' ? 'text-foreground' : 'text-foreground/60'
               )}
             >
-              Claim
+              Claim/Pay
             </Link>
             <Link
               href="/profile"
