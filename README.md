@@ -64,7 +64,7 @@ npm run dev
 
 Hardhat is used for Ethereum smart contract development, testing, and deployment.
 You'll deploy a smart contract to a local Ethereum blockchain using Hardhat, avoiding the need for public test networks like Rinkeby or Ropsten for this project.
-The smart contract will interact with external data sources (like weather data) and allow farmers to buy insurance based on weather conditions (e.g., if the temperature exceeds a threshold).
+The smart contract will interact with external data sources (like sensor data) and allow users to buy insurance based on conditions (e.g., if the input sensor data exceeds a threshold).
 
 **Smart Contract Functions:**
 
@@ -82,6 +82,7 @@ The smart contract will interact with external data sources (like weather data) 
 
 Hardhat includes testing functionalities to simulate and validate the contract behavior.
 Use Ethers.js and Chai for interacting with the contract and for testing.
+
 **Hardhat Configuration**:
 
 In the hardhat.config.js file, ensure configurations are set for deploying to the local chain and using Metamask.
